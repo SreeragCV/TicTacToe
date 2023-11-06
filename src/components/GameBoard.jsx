@@ -10,15 +10,16 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({onSelectSquare, activePlayerSymbol}) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   const handleClick = (rowIndex, colIndex) => {
     setGameBoard((prevBoard) => {
       const updatedBoard = [...prevBoard.map(e => [...e])]
-      updatedBoard[rowIndex][colIndex] = 'X';
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     })
+    onSelectSquare();
   }
 
 
