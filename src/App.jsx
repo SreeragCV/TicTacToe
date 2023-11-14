@@ -15,6 +15,7 @@ function App() {
 
       if (prevTurns.length > 0 && prevTurns[0].player === "X") {
         currentPlayer = "O";
+        // console.log(prevTurns[0].player);
       }
 
       const updatedTurns = [
@@ -23,13 +24,11 @@ function App() {
             row: rowIndex,
             col: colIndex,
           },
-          player: currentPlayer
+          player: currentPlayer,
         },
         ...prevTurns,
       ];
-
-      return updatedTurns
-
+      return updatedTurns;
     });
   };
 
@@ -48,12 +47,9 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        <GameBoard
-          onSelectSquare={handleSelectSquare}
-          turns={gameTurns}
-        />
+        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
       </div>
-      <Log />
+      <Log turns={gameTurns} />
     </main>
   );
 }
