@@ -3,6 +3,7 @@ import GameBoard from "./components/GameBoard.jsx";
 import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
 import { WINNING_COMBINATIONS } from "./components/winning-combinations.js";
+import GameOver from "./components/GameOver.jsx";
 
 //[0][0], [0][1], [0][2]
 //[1][0], [1][1], [1][2]
@@ -34,12 +35,19 @@ function App() {
     gameBoard[row][col] = player;
   }
 
+  let winner = null;
+
   for (const combinations of WINNING_COMBINATIONS){
     const firstSquareSymbol = gameBoard[combinations[0].row][combinations[0].column]
     const secondSquareSymbol = gameBoard[combinations[1].row][combinations[1].column]
     const thirdSquareSymbol = gameBoard[combinations[2].row][combinations[2].column]
 
+    if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+      winner = firstSquareSymbol;
+    }
   }
+
+  const draw = gameTurns.length === 9 && !winner;
 
   const handleSelectSquare = (rowIndex, colIndex) => {
     //setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
@@ -74,6 +82,7 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
+        {(winner || draw) && <GameOver winner={winner}/>}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
