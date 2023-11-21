@@ -53,6 +53,15 @@ function App() {
 
   const draw = gameTurns.length === 9 && !winner;
 
+  const handlePlayerName = (symbol, newName) => {
+    setPlayerName(prevName => {
+      return {
+        ...prevName,
+        [symbol]: newName
+      }
+    })
+  }
+
   const handleSelectSquare = (rowIndex, colIndex) => {
     //setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
 
