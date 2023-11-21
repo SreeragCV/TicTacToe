@@ -47,7 +47,7 @@ function App() {
     const thirdSquareSymbol = gameBoard[combinations[2].row][combinations[2].column]
 
     if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
-      winner = firstSquareSymbol;
+      winner = playerName[firstSquareSymbol];
     }
   }
 
@@ -92,11 +92,13 @@ function App() {
             initialName="player-1"
             symbol="X"
             isActive={activePlayer === "X"}
+            onChange={handlePlayerName}
           />
           <Player
             initialName="player-2"
             symbol="O"
             isActive={activePlayer === "O"}
+            onChange={handlePlayerName}
           />
         </ol>
         {(winner || draw) && <GameOver onRestart={restartMatch} winner={winner}/>}
